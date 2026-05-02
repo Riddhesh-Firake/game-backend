@@ -1,5 +1,9 @@
 from fastapi import FastAPI, WebSocket
 
+@app.get("/")
+def home():
+    return {"message": "Backend is running 🚀"}
+
 app = FastAPI()
 
 rooms = {}
