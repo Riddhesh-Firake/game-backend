@@ -1,10 +1,13 @@
 from fastapi import FastAPI, WebSocket
 
+# ✅ FIRST define app
+app = FastAPI()
+
+# ✅ THEN use it
 @app.get("/")
 def home():
     return {"message": "Backend is running 🚀"}
 
-app = FastAPI()
 
 rooms = {}
 
@@ -26,7 +29,6 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
     room = rooms[room_id]
     room.players.append(websocket)
 
-    # Start game when 2 players join
     if len(room.players) == 2:
         room.batsman = room.players[0]
         room.bowler = room.players[1]
